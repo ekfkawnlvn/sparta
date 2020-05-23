@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <style>
+        .all {
+            width: 500px;
+            margin: auto;
+            font-family: 'Yeon Sung', cursive;
+        }
+    </style>
+    <script>
+        function hey() {
+            let a = $('#1').val()
+            let b = $('#inputGroupSelect01').val()
+            let c = $('#3').val()
+            let d = $('#4').val()
+            if(a == ""){
+                alert('이름을 입력해주세요!');
+            }
+            else if(b == "--수량을 선택하세요--"){
+                alert('수량을 선택하세요!')
+            }
+            else if(c == ""){
+                alert('주소를 입력하세요!')
+            }
+            else if(d ==""){
+                alert('전화번호를 입력해주세요!')
+            }
+            else{
+                alert('주문이 완료되었습니다 상품을 조금만 기다려주세요!')
+            }
+        }
+        function q1(){
+        $.ajax({
+            type: "get",
+            url: "https://api.manana.kr/exchange/rate.json",
+            data: {},
+            success: function (response) {
+                let won = response[1]['rate']
+                $("#plus").append(`달러-원 환율 :${won}`)
+            }
+        });}
+        $("#all").ready(q1)
+    </script>
+</head>
+
+<body>
+    
+    <div id="all" class="all">
+        <br>
+        <div style=" text-align: center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSIFJLUHFGPP2b7SXQZ5RjYx8rRLBfXlMPtnGHuuRFH6SAaw_pt&usqp=CAU"
+                width="500px" height="300px" />
+        </div>
+        <br>
+        
+        <h1 style="display: inline"><a
+                href="https://www.google.com/search?q=%EC%96%91%EC%B4%88&oq=%EC%96%91%EC%B4%88&aqs=chrome..69i57j0l7.708j0j7&sourceid=chrome&ie=UTF-8">
+                양초</a>를 팝니다</h1>
+        <h4 style="display: inline">가격:3000원/개</h4>
+        <br>
+        <h5>이 양초는 특별한 힘을 가지고 있어요 양초를 켜고 소원을 빌면 짜자잔 뭐든지 이뤄지게 된답니다. 하나 사가세요! 대나무 향이 아주 좋아요</h5>
+        <br>
+        <h4 style="color:blue" id = "plus"></h4>
+        <div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span style="color: blue; background-color: yellowgreen;" class="input-group-text"
+                        id="inputGroup-sizing-sm">주문자 이름</span>
+                </div>
+                <input id="1" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <label style="color: blue; background-color: yellowgreen;" class="input-group-text"
+                        for="inputGroupSelect01">수량</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>--수량을 선택하세요--</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span style="color: blue; background-color: yellowgreen;" class="input-group-text"
+                        id="inputGroup-sizing-sm">주소</span>
+                </div>
+                <input id='3' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span style="color: blue; background-color: yellowgreen;" class="input-group-text"
+                        id="inputGroup-sizing-sm">전화번호</span>
+                </div>
+                <input id="4" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            </div>
+        </div>
+        <div style="text-align : center"><button onclick="hey()" type="button" class="btn btn-warning">주문하기</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
