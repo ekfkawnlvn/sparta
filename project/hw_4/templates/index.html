@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <style>
+        .all {
+            width: 500px;
+            margin: auto;
+            font-family: 'Yeon Sung', cursive;
+        }
+    </style>
+    <script>
+        $(document).ready(get())
+        function get() {
+            $('#table').empty()
+            $.ajax({
+                type: "GET",
+                url: "/a",
+                data: {},
+                success: function (response) {
+                    let orders = response['orders']
+                    console.log(orders)
+                    for (let i = 0; i < orders.length; i++) {
+                        let name = orders[i]['name']
+                        let num = orders[i]['num']
+                        let address = orders[i]['address']
+                        let phone = orders[i]['phone']
+                        make_table(name, num, address, phone)
+                    }
+                }
+            });
+        }
+        function make_table(name, num, address, phone) {
+            
+            let html = `<tr>
+                <td>${name}</td>
+                <td>${num}</td>
+                <td>${address}</td>
+                <td>${phone}</td>
+              </tr>`
+            $('#table').append(html)
+        }
+
+
+        function hey() {
+            let name = $('#oname').val()
+            let num = $('#inputGroupSelect01').val()
+            let address = $('#oaddress').val()
+            let phone = $('#ophone').val()
+            $.ajax({
+                type: "POST",
+                url: "/a",
+                data: {
+                    'name': name,
+                    'num': num,
+                    'address': address,
+                    'phone': phone
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert("연결성공")
+                    }
+                }
+            });
+            window.location.reload(true)
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="all">
+        <br>
+        <div style=" text-align: center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSIFJLUHFGPP2b7SXQZ5RjYx8rRLBfXlMPtnGHuuRFH6SAaw_pt&usqp=CAU"
+                width="500px" height="300px" />
+        </div>
+        <br>
+        <h1 style="display: inline"><a
+                href="https://www.google.com/search?q=%EC%96%91%EC%B4%88&oq=%EC%96%91%EC%B4%88&aqs=chrome..69i57j0l7.708j0j7&sourceid=chrome&ie=UTF-8">
+                양초</a>를 팝니다</h1>
+        <h4 style="display: inline">가격:3000원/개</h4>
+        <br>
+        <h5>이 양초는 특별한 힘을 가지고 있어요 양초를 켜고 소원을 빌면 짜자잔 뭐든지 이뤄지게 된답니다. 하나 사가세요! 대나무 향이 아주 좋아요</h5>
+        <br>
+        <div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span style="color: blue; background-color: yellowgreen;" class="input-group-text"
+                        id="inputGroup-sizing-sm">주문자 이름</span>
+                </div>
+                <input id='oname' type="text" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <label style="color: blue; background-color: yellowgreen;" class="input-group-text"
+                        for="inputGroupSelect01">수량</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>--수량을 선택하세요--</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span style="color: blue; background-color: yellowgreen;" class="input-group-text"
+                        id="inputGroup-sizing-sm">주소</span>
+                </div>
+                <input id='oaddress' type="text" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span style="color: blue; background-color: yellowgreen;" class="input-group-text"
+                        id="inputGroup-sizing-sm">전화번호</span>
+                </div>
+                <input id='ophone' type="text" class="form-control" aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+        </div>
+        <div style="text-align : center"><button onclick="hey()" type="button" class="btn btn-warning">주문하기</button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">이름</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">주소</th>
+                    <th scope="col">전화번호</th>
+                </tr>
+            </thead>
+            <tbody id='table'>
+                
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
